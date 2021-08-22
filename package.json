@@ -1,0 +1,15 @@
+{
+  "name": "class-tools-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rain15z3/ClassTools-Backend.git",
+  "author": "RainbowBird <rbxin2003@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "body-parser": "^1.19.0",
+    "chalk": "^4.1.2",
+    "express": "^4.17.1",
+    "moment": "^2.29.1"
+  }
+}
