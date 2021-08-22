@@ -30,5 +30,9 @@ module.exports = print = {
     message: ($message) => {
         let date = getDate();
         console.log(`[${date}]${getCaller()}${chalk.blue("[MESSAGE]")} ${$message}`);
+    },
+    json: ($json) => {
+        let date = getDate();
+        console.log(`[${date}]${getCaller()}${chalk.blue("[JSON]")}\n`, $json);
     }
 }
