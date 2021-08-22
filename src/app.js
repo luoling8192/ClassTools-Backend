@@ -1,9 +1,10 @@
-const config = require("./config.json");
-const logger = require("./src/utils/logger");
+const config = require("../config.json");
+const logger = require("./utils/logger");
 const bodyParser = require("body-parser");
+const retJSON = require("./utils/func/retJSON");
 
 module.exports = (app) => {
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({extended: true}));
 
   app.get("/", (req, res) => {
     res.send(`欢迎来到${config["class-name"]}API`);
@@ -15,6 +16,18 @@ module.exports = (app) => {
 
   app.post("/homework", async (req, res) => {
     res.send(await require("./homework").modify(req.body));
+  })
+
+  app.get("/gaokao", (req, res) => {
+    let date = new Date();
+    let gaokao_date = Date.parse(config["gaokao-date"]);
+    let date_span = gaokao_date - date;
+    let ret_span = Math.floor(date_span / (60 * 60 * 24 * 1000));
+
+    res.send(retJSON("/gaokao", 1, {
+      date: config["gaokao-date"],
+      span: ret_span
+    }))
   })
 
   app.listen(config.port, () => {
