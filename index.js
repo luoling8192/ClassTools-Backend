@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 
 let app = express();
-require("./src/app")(app);
+require('./src/app')(app);

@@ -1,13 +1,13 @@
-const logger = require("../logger");
+const logger = require('../logger');
 
-module.exports = (router, success, data, err = "") => {
+module.exports = (router, success, data, err = '') => {
   let json = {
     router: router,
     success: success,
     data: data,
-    err: err
+    err: err,
   };
 
   logger.json(json);
   return JSON.stringify(json);
-}
+};

@@ -1,10 +1,10 @@
-const fs = require("fs");
-const system = require("./system");
-const logger = require("./logger");
-const mergeObject = require("./func/mergeObject");
+const fs = require('fs');
+const system = require('./system');
+const logger = require('./logger');
+const mergeObject = require('./func/mergeObject');
 
 const create = async () => {
-  let data = require("./template");
+  let data = require('./template');
 
   try {
     fs.accessSync(system.today_data_path);
@@ -16,7 +16,7 @@ const create = async () => {
       return false;
     }
   }
-}
+};
 
 const load = async () => {
   try {
@@ -32,7 +32,7 @@ const load = async () => {
     logger.error(e);
     return e;
   }
-}
+};
 
 const write = async (data) => {
   try {
@@ -43,19 +43,19 @@ const write = async (data) => {
 
   let json = await load();
   json = mergeObject({}, json, data);
-  
+
   try {
     fs.writeFileSync(system.today_data_path, JSON.stringify(json));
-  } catch(e) {
+  } catch (e) {
     logger.error(e);
     return e;
   }
 
   return json;
-}
+};
 
 module.exports = {
   create: create,
   load: load,
-  write: write
-}
+  write: write,
+};
