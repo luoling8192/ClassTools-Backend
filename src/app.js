@@ -1,4 +1,4 @@
-const config = require('../config.json');
+const config = require('./config.json');
 const logger = require('./utils/logger');
 const bodyParser = require('body-parser');
 const retJSON = require('./utils/func/retJSON');
@@ -18,6 +18,10 @@ module.exports = (app) => {
 
   app.post('/homework', async (req, res) => {
     res.send(await require('./homework').modify(req.body));
+  });
+
+  app.get('/schedule', async (req, res) => {
+    res.send(await require("./schedule").query());
   });
 
   app.get('/gaokao', (req, res) => {
