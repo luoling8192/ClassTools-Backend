@@ -3,6 +3,7 @@ const logger = require('./utils/logger');
 const bodyParser = require('body-parser');
 const retJSON = require('./utils/func/retJSON');
 const cors = require('cors');
+const process = require('./utils/processData');
 
 module.exports = (app) => {
   app.use(bodyParser.urlencoded({extended: true}));
@@ -13,15 +14,30 @@ module.exports = (app) => {
   });
 
   app.get('/homework', async (req, res) => {
-    res.send(await require('./homework').query(req.query));
+    if (Object.keys(req.query).length === 0) {
+      res.status(400);
+      return res.send(retJSON(req.path, 0, {}, 'Bad Request'));
+    }
+
+    let data = await process.load();
+    let ret = {};
+
+    for (let q in req.query) {
+      ret[q] = data.homework[q];
+    }
+
+    res.send(retJSON(req.path, 1, ret));
   });
 
   app.post('/homework', async (req, res) => {
-    res.send(await require('./homework').modify(req.body));
+    const ret = await process.write({homework: {...req.body}});
+    res.send(retJSON(req.path, 1, ret))
   });
 
   app.get('/schedule', async (req, res) => {
-    res.send(await require("./schedule").query());
+    let data = await process.load();
+    let ret = data.schedule;
+    res.send(retJSON(req.path, 1, ret));
   });
 
   app.get('/gaokao', (req, res) => {
@@ -30,9 +46,18 @@ module.exports = (app) => {
     let date_span = gaokao_date - date;
     let ret_span = Math.floor(date_span / (60 * 60 * 24 * 1000));
 
-    res.send(retJSON('/gaokao', 1, {
+    res.send(retJSON(req.path, 1, {
       date: config['gaokao-date'],
       span: ret_span,
+    }));
+  });
+
+  app.get('/weather', (req, res) => {
+    // 调用和风天气API
+    // 城市列表：https://github.com/qwd/LocationList
+    res.send(retJSON(req.path, 1, {
+      city: config.weather['city'],
+      key: config.weather['key'],
     }));
   });
 
