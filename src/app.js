@@ -1,9 +1,9 @@
-const config = require('./config.json');
 const logger = require('./utils/logger');
 const bodyParser = require('body-parser');
 const retJSON = require('./utils/func/retJSON');
 const cors = require('cors');
 const process = require('./utils/processData');
+const config = require('./utils/config')();
 
 module.exports = (app) => {
   app.use(bodyParser.urlencoded({extended: true}));
