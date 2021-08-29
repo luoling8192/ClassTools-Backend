@@ -61,6 +61,10 @@ module.exports = (app) => {
     }));
   });
 
+  app.get('/settings', (req, res) => {
+    res.send(retJSON(req.path, 1, config));
+  })
+
   app.listen(config.port, () => {
     logger.success(`端口监听在：${config.port}`);
     require('./init')();

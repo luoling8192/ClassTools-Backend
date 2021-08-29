@@ -6,9 +6,8 @@ module.exports = () => {
 
   try {
     json = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'config.json'), 'utf-8'));
-    console.log(process.cwd().toString())
   } catch (e) {
-    json = {};
+    json = null;
   }
 
   return json ? json : require('../config.json');

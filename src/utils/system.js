@@ -2,7 +2,7 @@ const path = require('path');
 const moment = require('moment');
 
 const today_date = () => moment(Date.now()).format('YYYY-MM-DD');
-const today_day = () => moment(Date.now()).day();
+const today_day = () => moment(Date.now()).weekday();
 
 module.exports = {
   today_date: today_date,
