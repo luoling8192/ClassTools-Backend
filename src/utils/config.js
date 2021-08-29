@@ -20,7 +20,6 @@ async function set(body) {
   let config = get();
   let ret = mergeObject({}, config, body);
   const config_path = path.join(process.cwd(), 'config.json');
-  console.log(config_path)
 
   try {
     fs.writeFileSync(config_path, JSON.stringify(ret));
@@ -32,6 +31,6 @@ async function set(body) {
 }
 
 module.exports = {
-  get: get,
+  get: get(),
   set: set,
 };

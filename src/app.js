@@ -4,7 +4,7 @@ const retJSON = require('./utils/func/retJSON');
 const cors = require('cors');
 const process = require('./utils/data');
 const system = require('./utils/system');
-let config = require('./utils/config').get();
+let config = require('./utils/config').get;
 const modifyConfig = require('./utils/config').set;
 
 module.exports = (app) => {
