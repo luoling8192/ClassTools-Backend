@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const retJSON = require('./utils/func/retJSON');
 const cors = require('cors');
 const process = require('./utils/processData');
-const config = require('./utils/config')();
+const system = require('./utils/system');
+let config = require('./utils/config')();
 
 module.exports = (app) => {
   app.use(bodyParser.urlencoded({extended: true}));
@@ -31,12 +32,11 @@ module.exports = (app) => {
 
   app.post('/homework', async (req, res) => {
     const ret = await process.write({homework: {...req.body}});
-    res.send(retJSON(req.path, 1, ret))
+    res.send(retJSON(req.path, 1, ret));
   });
 
   app.get('/schedule', async (req, res) => {
-    let data = await process.load();
-    let ret = data.schedule;
+    let ret = config.schedule[system.today_day()];
     res.send(retJSON(req.path, 1, ret));
   });
 
@@ -63,6 +63,11 @@ module.exports = (app) => {
 
   app.get('/settings', (req, res) => {
     res.send(retJSON(req.path, 1, config));
+  });
+
+  app.post('/settings', (req, res) => {
+    let ret = config;
+
   })
 
   app.listen(config.port, () => {

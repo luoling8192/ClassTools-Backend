@@ -1,6 +1,3 @@
-const config = require('./config.js')();
-const system = require('./system');
-
 module.exports = {
   homework: {
     ch: '',
@@ -15,5 +12,4 @@ module.exports = {
     other: '',
     ban: '',
   },
-  schedule: [config.schedule[system.today_day()]],
 };
