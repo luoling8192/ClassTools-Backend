@@ -1,7 +1,7 @@
 const fs = require('fs');
 const system = require('./utils/system');
 const logger = require('./utils/logger');
-const data = require('./utils/processData');
+const data = require('./utils/data');
 const moment = require('moment');
 
 module.exports = async () => {

@@ -2,9 +2,10 @@ const logger = require('./utils/logger');
 const bodyParser = require('body-parser');
 const retJSON = require('./utils/func/retJSON');
 const cors = require('cors');
-const process = require('./utils/processData');
+const process = require('./utils/data');
 const system = require('./utils/system');
-let config = require('./utils/config')();
+let config = require('./utils/config').get();
+const modifyConfig = require('./utils/config').set;
 
 module.exports = (app) => {
   app.use(bodyParser.urlencoded({extended: true}));
@@ -65,9 +66,9 @@ module.exports = (app) => {
     res.send(retJSON(req.path, 1, config));
   });
 
-  app.post('/settings', (req, res) => {
-    let ret = config;
-
+  app.post('/settings', async (req, res) => {
+    let ret = await modifyConfig(req.body);
+    res.send(retJSON(req.path, 1, ret));
   })
 
   app.listen(config.port, () => {
