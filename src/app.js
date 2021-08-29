@@ -12,7 +12,7 @@ module.exports = (app) => {
   app.use(cors());
 
   app.get('/', (req, res) => {
-    res.send(`欢迎来到${config['class-name']}API`);
+    res.send(`欢迎来到${config()['class-name']}API`);
   });
 
   app.get('/homework', async (req, res) => {
@@ -32,23 +32,23 @@ module.exports = (app) => {
   });
 
   app.post('/homework', async (req, res) => {
-    const ret = await process.write({homework: {...req.body}});
+    const ret = await process.write({homework: {...JSON.parse(req.body.data)}});
     res.send(retJSON(req.path, 1, ret));
   });
 
   app.get('/schedule', async (req, res) => {
-    let ret = config.schedule[system.today_day()];
+    let ret = config().schedule[system.today_day()];
     res.send(retJSON(req.path, 1, ret));
   });
 
   app.get('/gaokao', (req, res) => {
     let date = new Date();
-    let gaokao_date = Date.parse(config['gaokao-date']);
+    let gaokao_date = Date.parse(config()['gaokao-date']);
     let date_span = gaokao_date - date;
     let ret_span = Math.floor(date_span / (60 * 60 * 24 * 1000));
 
     res.send(retJSON(req.path, 1, {
-      date: config['gaokao-date'],
+      date: config()['gaokao-date'],
       span: ret_span,
     }));
   });
@@ -57,22 +57,22 @@ module.exports = (app) => {
     // 调用和风天气API
     // 城市列表：https://github.com/qwd/LocationList
     res.send(retJSON(req.path, 1, {
-      city: config.weather['city'],
-      key: config.weather['key'],
+      city: config().weather['city'],
+      key: config().weather['key'],
     }));
   });
 
   app.get('/settings', (req, res) => {
-    res.send(retJSON(req.path, 1, config));
+    res.send(retJSON(req.path, 1, config()));
   });
 
   app.post('/settings', async (req, res) => {
-    let ret = await modifyConfig(req.body);
+    let ret = await modifyConfig(JSON.parse(req.body.data));
     res.send(retJSON(req.path, 1, ret));
   })
 
-  app.listen(config.port, () => {
-    logger.success(`端口监听在：${config.port}`);
+  app.listen(config().port, () => {
+    logger.success(`端口监听在：${config().port}`);
     require('./init')();
   });
 };

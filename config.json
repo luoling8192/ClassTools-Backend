@@ -1,1 +1,1 @@
-{"class-name":"test1","port":8088,"gaokao-date":"2023-6-7","schedule":["","","","","","",""],"weather":""}
+{"class-name":"十二班1","port":8088,"gaokao-date":"2023-6-7","schedule":[["语文","数学","英语"],["物理","暂无","test"],["暂无"],["暂无"],["暂无"],["暂无"],["暂无"]],"weather":{"city":"CN101240102","key":"0b23abc522ab4c15804ace26ef307466"}}

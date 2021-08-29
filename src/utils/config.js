@@ -31,6 +31,6 @@ async function set(body) {
 }
 
 module.exports = {
-  get: get(),
+  get: get,
   set: set,
 };
