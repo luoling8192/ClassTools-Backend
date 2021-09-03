@@ -14,5 +14,7 @@
   "weather": {
     "city": "CN101240102",
     "key": "0b23abc522ab4c15804ace26ef307466"
-  }
+  },
+  "wallpaper": "./wallpaper.jpeg",
+  "font-size": "24"
 }
