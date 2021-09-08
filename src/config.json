@@ -1,6 +1,7 @@
 {
   "class-name": "十二班",
   "port": 8088,
+  "count-name": "高考",
   "gaokao-date": "2023-6-7",
   "schedule": [
     ["暂无"],
@@ -15,6 +16,7 @@
     "city": "CN101240102",
     "key": "0b23abc522ab4c15804ace26ef307466"
   },
-  "wallpaper": "./wallpaper.jpeg",
-  "font-size": "24"
+  "wallpaper": "url(./wallpaper.jpeg)",
+  "font-size": "32",
+  "homework-font-size": "24"
 }

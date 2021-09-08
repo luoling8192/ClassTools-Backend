@@ -48,6 +48,7 @@ module.exports = (app) => {
     let ret_span = Math.floor(date_span / (60 * 60 * 24 * 1000));
 
     res.send(retJSON(req.path, 1, {
+      name: config()['count-name'],
       date: config()['gaokao-date'],
       span: ret_span,
     }));
