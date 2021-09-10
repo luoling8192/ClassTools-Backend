@@ -21,8 +21,8 @@
   "bin": "./index.js",
   "pkg": {
     "targets": [
-      "node14-linux-x64",
-      "node14-windows-x64"
+      "node12-linux-x64",
+      "node12-windows-x64"
     ],
     "outputPath": "dist"
   }
