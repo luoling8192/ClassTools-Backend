@@ -4,6 +4,9 @@ const retJSON = require('./utils/func/retJSON');
 const cors = require('cors');
 const process = require('./utils/data');
 const system = require('./utils/system');
+const fs = require('fs');
+const moment = require('moment');
+const data = require('./utils/data');
 let config = require('./utils/config').get;
 const modifyConfig = require('./utils/config').set;
 
@@ -45,7 +48,7 @@ module.exports = (app) => {
     let date = new Date();
     let gaokao_date = Date.parse(config()['gaokao-date']);
     let date_span = gaokao_date - date;
-    let ret_span = Math.floor(date_span / (60 * 60 * 24 * 1000));
+    let ret_span = Math.floor(date_span / (60 * 60 * 24 * 1000)) + 1;
 
     res.send(retJSON(req.path, 1, {
       name: config()['count-name'],
@@ -70,10 +73,17 @@ module.exports = (app) => {
   app.post('/settings', async (req, res) => {
     let ret = await modifyConfig(JSON.parse(req.body.data));
     res.send(retJSON(req.path, 1, ret));
-  })
+  });
 
   app.listen(config().port, () => {
     logger.success(`端口监听在：${config().port}`);
-    require('./init')();
+
+    fs.mkdir(system.data_path, (err) => {
+      if (err && err['code'] !== 'EEXIST')
+        logger.error(err);
+    });
+
+    moment.locale('zh-cn');
+    setInterval(async () => await data.create(), 1000 * 60 * 60);
   });
 };
