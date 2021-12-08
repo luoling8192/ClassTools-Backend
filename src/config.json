@@ -18,5 +18,7 @@
   },
   "wallpaper": "url(./wallpaper.jpeg)",
   "font-size": "32",
-  "homework-font-size": "24"
+  "font-color": "#000",
+  "homework-font-size": "24",
+  "homework-font-color": "#000"
 }
